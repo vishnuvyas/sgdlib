@@ -10,7 +10,7 @@ class GradientDescentSpec extends FlatSpec with ShouldMatchers {
   val tolerance:Double = 1e-5
 
   "A Gradient Descent optimizer" should "optimize a simple quadratic function" in {
-    val quadraticObjective = new ObjectiveFunction {
+    val quadraticObjective = new ObjectiveFunction[Array[Double]] {
 
       override def eval(x: Array[Double]) = x.map(xi => math.pow(xi,2)).sum
 

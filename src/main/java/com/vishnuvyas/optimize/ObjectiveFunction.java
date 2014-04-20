@@ -9,22 +9,26 @@ package com.vishnuvyas.optimize;
  *
  * Created by vishnu on 4/19/14.
  */
-public interface ObjectiveFunction {
+public interface ObjectiveFunction<VectorType> {
 
     /**
-     * Compute the gradient at point x.
+     * Compute the gradient at point x. (This assumes that the input value is not modified)
      * @param x - the point at which the gradient is computed.
      * @return  the gradient at the point x
      */
-    public double[] gradient(double [] x);
+    public double[] gradient(final double [] x);
 
 
     /**
-     * Given the gradient g, compute its proximal (for simple cases proximal can be an identity)
+     * Given the a point g, compute its proximal (for simple cases proximal can be an identity).
+     * Assumes that the point can be modified in place. This is useful when trying to deal with
+     * high dimensional problems so that the updates take inplace, but at the same time, makes this
+     * call thread unsafe.
+     *
      * @param g a point
      * @return the proximal of the input
      */
-    public double[] prox(double [] g);
+    public double[] prox(VectorType g);
 
 
     /**
@@ -33,6 +37,6 @@ public interface ObjectiveFunction {
      * @param x  the input point x
      * @return the value of the function at x
      */
-    public double eval(double [] x);
+    public double eval(VectorType x);
 
 }

@@ -5,8 +5,22 @@ package com.vishnuvyas.optimize;
  */
 public class GradientDescentOptimizer {
 
-    private static final double STEPSIZE_MIN = 1e-7;
 
+    /**
+     * Computes a single descent step given an objective function, an initial value
+     * an alpha (typically 1/stepSize) and the iteration number (t) where it decays
+     * the value of the stepSize by the iteration number using (1/t)
+     *
+     * This step size is assumed to modify the iv inplace and return the same reference
+     * as the iv in its return value (if the proximal function of the objective also modifies
+     * the vector inplace).
+     *
+     * @param objectiveFunction the objective function we want to minimize
+     * @param iv    the initial value of the minimizer
+     * @param alpha the inverse stepSize (1/stepSize)
+     * @param t     the iteration count. (for adaptively decreasing the step-size)
+     * @return An updated value of the minimizer.
+     */
     public double [] descentStep(ObjectiveFunction objectiveFunction, double [] iv, double alpha, int t) {
 
         // compute the gradient and the step size.
