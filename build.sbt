@@ -1,9 +1,9 @@
 // a simple java program for
 
 
-organization := "apixio"
+organization := "com.vishnuvyas"
 
-name := "apixio-sgdlib"
+name := "sgdlib"
 
 version := "0.0.1"
 

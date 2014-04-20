@@ -5,3 +5,4 @@ project/
 *.swp
 **/*.swp
 .tags
+.idea/
