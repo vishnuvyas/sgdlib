@@ -5,9 +5,13 @@ package com.vishnuvyas.optimize;
  */
 public class GradientDescentOptimizer {
 
+    private static final double STEPSIZE_MIN = 1e-7;
+
     public double [] descentStep(ObjectiveFunction objectiveFunction, double [] iv, double alpha, int t) {
+
+        // compute the gradient and the step size.
         double [] gradient = objectiveFunction.gradient(iv);
-        double stepSize = Math.pow(alpha, 1.0/(0.1 + Math.abs(t)));
+        double stepSize = 1.0/(alpha*t + 0.1);
 
         // scale the gradient by the step-size
         for(int i = 0; i < gradient.length; ++i)

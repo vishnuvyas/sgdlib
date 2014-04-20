@@ -21,9 +21,18 @@ public interface ObjectiveFunction {
 
     /**
      * Given the gradient g, compute its proximal (for simple cases proximal can be an identity)
-     * @param g the gradient
-     * @return the proximal of the gradient
+     * @param g a point
+     * @return the proximal of the input
      */
     public double[] prox(double [] g);
+
+
+    /**
+     * Evaluate the function at the given point (x). This function can left to have a dummy
+     * implementation, because the actual gradient descent doesn't use this function directly.
+     * @param x  the input point x
+     * @return the value of the function at x
+     */
+    public double eval(double [] x);
 
 }
