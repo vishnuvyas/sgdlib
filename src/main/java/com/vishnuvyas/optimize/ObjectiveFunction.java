@@ -28,7 +28,7 @@ public interface ObjectiveFunction<VectorType> {
      * @param g a point
      * @return the proximal of the input
      */
-    public double[] prox(VectorType g);
+    public double[] prox(double[] g);
 
 
     /**

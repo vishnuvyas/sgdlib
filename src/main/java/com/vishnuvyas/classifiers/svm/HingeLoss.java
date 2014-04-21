@@ -13,7 +13,7 @@ import java.util.Arrays;
  *
  * Created by vishnu on 4/20/14.
  */
-public class HingeLoss extends L2RegularizedObjective {
+public class HingeLoss extends L2RegularizedObjective<double[]> {
 
     private Dataset<double[],Boolean> dataset;
     private double regularizationParam;
