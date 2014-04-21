@@ -12,7 +12,7 @@ import com.vishnuvyas.classifiers.Classifier
  */
 class DiabetesDataset extends Dataset[Array[Double],java.lang.Boolean] {
 
-  val dataFileStream = ClassLoader.getSystemClassLoader.getResourceAsStream("pima-indians-diabetes.data")
+  val dataFileStream = getClass.getResourceAsStream("/pima-indians-diabetes.data")
   val fieldNames = Array("npreg","glucose","dbp","tricep","insulin2hr","bmi","dbpf","age","diabetec")
   val fieldDescriptions = Map(
     "npreg" -> "Number of times pregnant",
