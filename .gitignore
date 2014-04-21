@@ -1,0 +1,8 @@
+*.class
+**/*.class
+target/
+project/
+*.swp
+**/*.swp
+.tags
+.idea/
