@@ -41,7 +41,7 @@ class SparseVectorSpec extends FlatSpec with ShouldMatchers {
   }
 
   it should "throw an array out of bounds exceptions when we get elements greater than the dimensions" in {
-      an [ArrayIndexOutOfBoundsException] should be thrownBy(sv.get(4))s
+      an [ArrayIndexOutOfBoundsException] should be thrownBy(sv.get(4))
   }
 
 }
