@@ -2,7 +2,6 @@ package com.vishnuvyas.classifiers.svm
 
 import org.scalatest.{ShouldMatchers, FlatSpec}
 import com.vishnuvyas.classifiers.Classifier
-import collection.JavaConversions._
 import java.io.{OutputStream, InputStream}
 import java.util
 

@@ -5,7 +5,6 @@ import com.vishnuvyas.classifiers.training.Trainer;
 import com.vishnuvyas.classifiers.training.dataset.Dataset;
 import com.vishnuvyas.optimize.GradientDescentOptimizer;
 
-
 import java.util.Arrays;
 
 /**

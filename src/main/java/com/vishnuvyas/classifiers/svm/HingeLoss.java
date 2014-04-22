@@ -1,7 +1,6 @@
 package com.vishnuvyas.classifiers.svm;
 
 import com.vishnuvyas.classifiers.training.dataset.Dataset;
-import com.vishnuvyas.optimize.L1RegularizedObjective;
 import com.vishnuvyas.optimize.L2RegularizedObjective;
 
 import java.util.Arrays;

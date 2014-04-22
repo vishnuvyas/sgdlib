@@ -1,7 +1,6 @@
 package com.vishnuvyas.classifiers.svm;
 
 import com.vishnuvyas.classifiers.Classifier;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.InputStream;
 import java.io.OutputStream;
