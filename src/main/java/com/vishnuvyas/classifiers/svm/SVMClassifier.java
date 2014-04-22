@@ -1,7 +1,6 @@
 package com.vishnuvyas.classifiers.svm;
 
 import com.vishnuvyas.classifiers.Classifier;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -38,11 +37,11 @@ public class SVMClassifier implements Classifier<double[],Boolean> {
 
     @Override
     public void save(OutputStream os) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException("Not Implemented");
     }
 
     @Override
     public void load(InputStream is) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException("Not Implemented");
     }
 }

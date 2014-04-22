@@ -3,7 +3,7 @@ package com.vishnuvyas.optimize;
 /**
  * Created by vishnu on 4/20/14.
  */
-abstract public class L1RegularizedObjective implements ObjectiveFunction<double[]> {
+abstract public class L1RegularizedObjective implements ObjectiveFunction {
 
 
     /**

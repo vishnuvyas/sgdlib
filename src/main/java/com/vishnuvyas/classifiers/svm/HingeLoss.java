@@ -1,7 +1,6 @@
 package com.vishnuvyas.classifiers.svm;
 
 import com.vishnuvyas.classifiers.training.dataset.Dataset;
-import com.vishnuvyas.optimize.L1RegularizedObjective;
 import com.vishnuvyas.optimize.L2RegularizedObjective;
 
 import java.util.Arrays;
@@ -18,12 +17,6 @@ public class HingeLoss extends L2RegularizedObjective {
     private Dataset<double[],Boolean> dataset;
     private double regularizationParam;
 
-    private double booleanLoss(boolean b) {
-        if(b)
-            return 1;
-        else
-            return -1;
-    }
 
     private double dot(double [] x, double [] y) {
         assert x.length == y.length : "The dimensions of the two vectors in a dot product should be same";
@@ -75,5 +68,12 @@ public class HingeLoss extends L2RegularizedObjective {
         }
 
         return loss;
+    }
+
+    public static double booleanLoss(boolean b) {
+        if(b)
+            return 1;
+        else
+            return -1;
     }
 }

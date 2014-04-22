@@ -1,6 +1,6 @@
 package com.vishnuvyas.classifiers.svm
 
-import com.vishnuvyas.classifiers.training.dataset.Dataset
+import com.vishnuvyas.classifiers.training.dataset.{AbstractDataset, Dataset}
 import scala.io.Source
 import java.util
 import collection.JavaConversions._
@@ -10,7 +10,7 @@ import com.vishnuvyas.classifiers.Classifier
 /**
  * Created by vishnu on 4/20/14.
  */
-class DiabetesDataset extends Dataset[Array[Double],java.lang.Boolean] {
+class DiabetesDataset extends AbstractDataset[Array[Double],java.lang.Boolean] {
 
   val dataFileStream = getClass.getResourceAsStream("/pima-indians-diabetes.data")
   val fieldNames = Array("npreg","glucose","dbp","tricep","insulin2hr","bmi","dbpf","age","diabetec")
@@ -80,7 +80,7 @@ class DiabetesDataset extends Dataset[Array[Double],java.lang.Boolean] {
   }
 
 
-  def trainingError(c:Classifier[Array[Double],java.lang.Boolean]):Int = {
+  override def trainingError(c:Classifier[Array[Double],java.lang.Boolean]):Int = {
     dataset.map(_ match {
       case (xi,yi) =>
         val (prediction,margin) = c.predictions(xi).toSeq.sortWith(_._2 < _._2)(0)

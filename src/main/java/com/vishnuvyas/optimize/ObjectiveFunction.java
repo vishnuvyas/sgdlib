@@ -9,7 +9,7 @@ package com.vishnuvyas.optimize;
  *
  * Created by vishnu on 4/19/14.
  */
-public interface ObjectiveFunction<VectorType> {
+public interface ObjectiveFunction {
 
     /**
      * Compute the gradient at point x. (This assumes that the input value is not modified)
@@ -28,7 +28,7 @@ public interface ObjectiveFunction<VectorType> {
      * @param g a point
      * @return the proximal of the input
      */
-    public double[] prox(VectorType g);
+    public double[] prox(double[] g);
 
 
     /**
@@ -37,6 +37,6 @@ public interface ObjectiveFunction<VectorType> {
      * @param x  the input point x
      * @return the value of the function at x
      */
-    public double eval(VectorType x);
+    public double eval(double [] x);
 
 }
