@@ -21,7 +21,7 @@ public class SparseVector {
     private int tail = 0;
     private boolean optimized = false;
 
-    private static final int DEFAULT_ALLOC_SIZE = 4096;
+    private static final int DEFAULT_ALLOC_SIZE = 1024;
     private static final int INDEX_DEFAULT = -1;
 
     /**
@@ -34,9 +34,28 @@ public class SparseVector {
         int initialAllocSize = Math.min(dim, DEFAULT_ALLOC_SIZE);
         values = new double[initialAllocSize];
         indices = new int[initialAllocSize];
+        tail = 0;
 
         Arrays.fill(values,0.0d);
         Arrays.fill(indices,INDEX_DEFAULT);
+    }
+
+    /**
+     * Create a sparse vector from a dense vector.
+     * @param vec the dense vector
+     */
+    public SparseVector(double [] vec) {
+        this.dim = vec.length;
+        values = new double[dim];
+        indices = new int[dim];
+        tail = 0;
+        for(int i = 0; i < vec.length; ++i) {
+            if(vec[i] != 0) {
+                indices[tail] = i;
+                values[tail] = vec[i];
+                tail++;
+            }
+        }
     }
 
 
