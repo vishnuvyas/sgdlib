@@ -5,6 +5,12 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
+ * A SparseVector, which is implemented using 2 parallel arrays, one for
+ * indices and other for values. The best way to use this class is to first
+ * create the sparse vector  and optimize it using the optimize() call and then
+ * using the optimized version of the vector, where access (both sequential) and
+ * random access is much faster.
+ *
  * Created by vishnu on 4/20/14.
  */
 public class SparseVector {
@@ -33,6 +39,7 @@ public class SparseVector {
         Arrays.fill(indices,INDEX_DEFAULT);
     }
 
+
     /**
      * Gets the current cardinality (number of non-zeros) in the sparse
      * vector.
@@ -41,6 +48,15 @@ public class SparseVector {
      */
     public int getCardinality() {
         return tail;
+    }
+
+
+    /**
+     * Returns the dimensions with this vector was created with.
+     * @return the dimension of this sparse vector.
+     */
+    public int getDim()  {
+        return dim;
     }
 
 
@@ -141,7 +157,8 @@ public class SparseVector {
         }
     }
 
-    // package public methods go here.
+    // package public methods go here - mostly used by tests to
+    // inspect the internals of this object
 
     int [] getIndices() {
         return indices;
@@ -152,8 +169,13 @@ public class SparseVector {
     }
 
 
-    // private methods go here.
+    // private methods
+
     private int searchForIndex(int index) {
+        if(optimized) {
+            return Arrays.binarySearch(indices,index,0,tail);
+        }
+
         int c = -1;
         for(int i = 0; i < tail; ++i) {
             if(indices[i] == index) {
