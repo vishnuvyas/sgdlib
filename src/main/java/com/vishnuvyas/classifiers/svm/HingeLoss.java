@@ -13,17 +13,11 @@ import java.util.Arrays;
  *
  * Created by vishnu on 4/20/14.
  */
-public class HingeLoss extends L2RegularizedObjective<double[]> {
+public class HingeLoss extends L2RegularizedObjective {
 
     private Dataset<double[],Boolean> dataset;
     private double regularizationParam;
 
-    private double booleanLoss(boolean b) {
-        if(b)
-            return 1;
-        else
-            return -1;
-    }
 
     private double dot(double [] x, double [] y) {
         assert x.length == y.length : "The dimensions of the two vectors in a dot product should be same";
@@ -75,5 +69,12 @@ public class HingeLoss extends L2RegularizedObjective<double[]> {
         }
 
         return loss;
+    }
+
+    public static double booleanLoss(boolean b) {
+        if(b)
+            return 1;
+        else
+            return -1;
     }
 }
