@@ -175,7 +175,7 @@ public class SparseVector {
         if(index > dim)
             throw new ArrayIndexOutOfBoundsException(index);
         else if(optimized) {
-            return Arrays.binarySearch(indices,index,0,tail);
+            return Arrays.binarySearch(indices,0,tail,index);
         }
 
         int c = -1;

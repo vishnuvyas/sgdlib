@@ -34,4 +34,14 @@ class SparseVectorSpec extends FlatSpec with ShouldMatchers {
     dot(d1,d2) should be (sv.dot(d2))
   }
 
+  it should "still have a proper get method after an optimize call" in {
+    sv.optimize()
+    sv.get(2) should be (4)
+    sv.get(1) should be (0)
+  }
+
+  it should "throw an array out of bounds exceptions when we get elements greater than the dimensions" in {
+      an [ArrayIndexOutOfBoundsException] should be thrownBy(sv.get(4))s
+  }
+
 }
