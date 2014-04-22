@@ -38,11 +38,11 @@ public class SVMClassifier implements Classifier<double[],Boolean> {
 
     @Override
     public void save(OutputStream os) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException("Not Implemented");
     }
 
     @Override
     public void load(InputStream is) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException("Not Implemented");
     }
 }
