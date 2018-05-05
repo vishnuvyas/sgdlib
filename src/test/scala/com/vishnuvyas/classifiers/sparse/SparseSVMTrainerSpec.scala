@@ -12,8 +12,8 @@ class SparseSVMTrainerSpec extends FlatSpec with ShouldMatchers {
     val dataset = new DiabetesDataset
     val sparseDataset = new SparseDatasetAdapter(dataset)
 
-    val trainer = new SVMTrainer(4000,1,0.01)
-    val sparseTrainer = new SparseSVMTrainer(4000,1,0.01,0.1)
+    val trainer = new SVMTrainer(4000,1,0.01f)
+    val sparseTrainer = new SparseSVMTrainer(4000,1,0.01f,0.1f)
 
     val classifier = trainer.train(dataset)
     val sparseClassifer = sparseTrainer.train(sparseDataset)

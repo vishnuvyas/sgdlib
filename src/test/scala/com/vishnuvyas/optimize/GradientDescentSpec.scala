@@ -7,26 +7,26 @@ import org.scalatest.{ShouldMatchers, FlatSpec}
  */
 class GradientDescentSpec extends FlatSpec with ShouldMatchers {
 
-  val tolerance:Double = 1e-5
+  val tolerance:Float = 1e-5f
 
   "A Gradient Descent optimizer" should "optimize a simple quadratic function" in {
     val quadraticObjective = new ObjectiveFunction {
 
-      override def eval(x: Array[Double]) = x.map(xi => math.pow(xi,2)).sum
+      override def eval(x: Array[Float]) = x.map(xi => math.pow(xi,2)).sum.toFloat
 
-      override def prox(g: Array[Double]): Array[Double] = g
+      override def prox(g: Array[Float]): Array[Float] = g
 
-      override def gradient(x: Array[Double]): Array[Double] = x.map(xi => 2*xi)
+      override def gradient(x: Array[Float]): Array[Float] = x.map(xi => 2*xi)
     }
 
     val optimizer = new GradientDescentOptimizer
 
-    val w = (1 to 1000).foldLeft(Array(1,10d,100d,1000d,10000d)) { (w,t) =>
-      optimizer.descentStep(quadraticObjective,w,0.5,t)
+    val w = (1 to 1000).foldLeft(Array(1,10f,100f,1000f,10000f)) { (w,t) =>
+      optimizer.descentStep(quadraticObjective,w,0.5f,t)
     }
 
     // see if the value of the quadratic is near zero.
-    quadraticObjective.eval(w) should equal (0d +- tolerance)
+    quadraticObjective.eval(w) should equal (0f +- tolerance)
   }
 
 }

@@ -12,7 +12,7 @@ class SparseVectorSpec extends FlatSpec with ShouldMatchers {
   sv.set(1,0)
   sv.set(0,6)
 
-  private [this] def dot(d1:Array[Double],d2:Array[Double]) = d1.zip(d2).map({case (xi,xj) => xi*xj}).sum
+  private [this] def dot(d1:Array[Float],d2:Array[Float]) = d1.zip(d2).map({case (xi,xj) => xi*xj}).sum
 
   "A sparse vector " should "keep the cardinalty of the sparse vector unchanged after optimize" in {
     sv.optimize() should be (sv.getCardinality)
@@ -28,8 +28,8 @@ class SparseVectorSpec extends FlatSpec with ShouldMatchers {
   }
 
   it should "have the same dot-product as a dense-vector dot-product" in {
-    val d1 = Array(6.0d,0,4)
-    val d2 = Array(8.0d,6,-7)
+    val d1 = Array(6.0f,0,4)
+    val d2 = Array(8.0f,6,-7)
 
     dot(d1,d2) should be (sv.dot(d2))
   }

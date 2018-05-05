@@ -8,8 +8,8 @@ import java.{lang, util}
  * sparse dataset (which uses sparse vectors)
  * Created by vishnu on 4/21/14.
  */
-class SparseDatasetAdapter(dataset:Dataset[Array[Double],java.lang.Boolean]) extends AbstractDataset[SparseVector,java.lang.Boolean]{
-  override def sample(fraction: Double): Dataset[SparseVector, lang.Boolean] = new SparseDatasetAdapter(dataset.sample(fraction))
+class SparseDatasetAdapter(dataset:Dataset[Array[Float],java.lang.Boolean]) extends AbstractDataset[SparseVector,java.lang.Boolean]{
+  override def sample(fraction: Float): Dataset[SparseVector, lang.Boolean] = new SparseDatasetAdapter(dataset.sample(fraction))
 
   override def getPoint(i: Int): SparseVector = new SparseVector(dataset.getPoint(i))
 

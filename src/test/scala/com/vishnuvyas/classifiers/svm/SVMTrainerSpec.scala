@@ -19,14 +19,14 @@ class SVMTrainerSpec extends FlatSpec with ShouldMatchers {
   }
 
   "A SVMTrainer"  should "be able to train from a dataset to get a classifer" in {
-    val trainer = new SVMTrainer(4000,1,0.01)
+    val trainer = new SVMTrainer(4000,1,0.01f)
     val dataset = new DiabetesDataset
 
     trainer.setPrinting(true)
 
-    val baselineClassifier = new Classifier[Array[Double],java.lang.Boolean] {
-      override def predictions(x : Array[Double]) = {
-        val m = new util.HashMap[java.lang.Boolean,java.lang.Double]()
+    val baselineClassifier = new Classifier[Array[Float],java.lang.Boolean] {
+      override def predictions(x : Array[Float]) = {
+        val m = new util.HashMap[java.lang.Boolean,java.lang.Float]()
         m.put(false,0)
         m
       }
