@@ -12,10 +12,10 @@ import java.util.Arrays;
  * Created by vishnu on 4/21/14.
  */
 public class SparseSVMTrainer implements Trainer<SparseVector,Boolean> {
-    private double batchFraction;
+    private float batchFraction;
     private int niter;
-    private double regularizationParameter;
-    private double learningRate;
+    private float regularizationParameter;
+    private float learningRate;
     private boolean printing=false;
 
     public void setPrinting(boolean p) {
@@ -29,7 +29,7 @@ public class SparseSVMTrainer implements Trainer<SparseVector,Boolean> {
      * @param batchFraction the fraction of the data that is used in each iteration
      * @param regularizationParameter the regularization parameter
      */
-    public SparseSVMTrainer(int niter,double batchFraction, double regularizationParameter,double learningRate) {
+    public SparseSVMTrainer(int niter,float batchFraction, float regularizationParameter,float learningRate) {
         this.niter = niter;
         this.batchFraction = batchFraction;
         this.regularizationParameter = regularizationParameter;
@@ -39,8 +39,8 @@ public class SparseSVMTrainer implements Trainer<SparseVector,Boolean> {
     @Override
     public Classifier<SparseVector, Boolean> train(Dataset<SparseVector, Boolean> dataset) {
         GradientDescentOptimizer optimizer = new GradientDescentOptimizer();
-        double [] w = new double[dataset.dim()];
-        Arrays.fill(w,0.0d);
+        float [] w = new float[dataset.dim()];
+        Arrays.fill(w,0.0f);
 
         for(int t = 0; t < niter; ++t) {
             Dataset<SparseVector,Boolean> sample = dataset.sample(batchFraction);

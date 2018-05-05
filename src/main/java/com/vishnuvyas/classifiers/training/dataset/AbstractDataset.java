@@ -15,12 +15,12 @@ public abstract class AbstractDataset<V,L> implements Dataset<V,L> {
         for(int i = 0; i < count(); ++i) {
             V xi = getPoint(i);
             L yi = getLabel(i);
-            Map<L,Double> predictions = classifier.predictions(xi);
+            Map<L,Float> predictions = classifier.predictions(xi);
 
             // identify the best prediction from the result
             L bestPred = null;
-            double currentBest = Double.NEGATIVE_INFINITY;
-            for(Map.Entry<L,Double> e : predictions.entrySet() ) {
+            float currentBest = Float.NEGATIVE_INFINITY;
+            for(Map.Entry<L,Float> e : predictions.entrySet() ) {
                 if(bestPred == null) {
                     bestPred = e.getKey();
                     currentBest = e.getValue();

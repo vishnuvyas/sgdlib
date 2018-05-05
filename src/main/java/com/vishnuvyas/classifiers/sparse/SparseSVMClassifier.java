@@ -12,16 +12,16 @@ import java.util.Map;
  */
 public class SparseSVMClassifier implements Classifier<SparseVector,Boolean> {
 
-    private double [] w;
+    private float [] w;
 
-    public SparseSVMClassifier(double [] w) {
+    public SparseSVMClassifier(float [] w) {
         this.w = w;
     }
 
     @Override
-    public Map<Boolean, Double> predictions(SparseVector point) {
-        double v = point.dot(w);
-        Map<Boolean,Double> m = new HashMap<Boolean, Double>();
+    public Map<Boolean, Float> predictions(SparseVector point) {
+        float v = point.dot(w);
+        Map<Boolean,Float> m = new HashMap<Boolean, Float>();
         if(v > 0) {
             m.put(true,v);
         } else {

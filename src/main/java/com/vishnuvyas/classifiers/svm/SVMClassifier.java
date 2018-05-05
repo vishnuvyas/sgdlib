@@ -10,20 +10,20 @@ import java.util.Map;
 /**
  * Created by vishnu on 4/20/14.
  */
-public class SVMClassifier implements Classifier<double[],Boolean> {
-    private double [] w;
+public class SVMClassifier implements Classifier<float[],Boolean> {
+    private float [] w;
 
-    public double[] getWeights() { return w; }
+    public float[] getWeights() { return w; }
 
-    public SVMClassifier(double [] w) {
+    public SVMClassifier(float [] w) {
         this.w = w;
     }
 
     @Override
-    public Map<Boolean, Double> predictions(double[] point) {
+    public Map<Boolean, Float> predictions(float[] point) {
         assert point.length == w.length  : "The dimensions of the wieght vector does not match point";
-        Map<Boolean,Double> m = new HashMap<Boolean, Double>();
-        double s = 0;
+        Map<Boolean,Float> m = new HashMap<Boolean, Float>();
+        float s = 0;
         for(int i = 0; i < point.length; ++i)
             s += (point[i]*w[i]);
         if(s>0) {

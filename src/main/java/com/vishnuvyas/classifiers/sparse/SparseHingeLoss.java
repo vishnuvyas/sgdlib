@@ -12,20 +12,20 @@ import java.util.Arrays;
 public class SparseHingeLoss extends L2RegularizedObjective {
 
     private Dataset<SparseVector,Boolean> dataset;
-    private double regularizationParam;
+    private float regularizationParam;
 
     /**
      * Create a new sparse hinge loss, used in our trainers.
      * @param dataset the dataset over which the loss is constructed
      * @param lambda  the capacity parameter for this svm (typically C)
      */
-    public SparseHingeLoss(Dataset<SparseVector,Boolean> dataset, double lambda) {
+    public SparseHingeLoss(Dataset<SparseVector,Boolean> dataset, float lambda) {
         this.dataset = dataset;
         this.regularizationParam = lambda;
     }
 
     @Override
-    public double getRegularizationParam() {
+    public float getRegularizationParam() {
         return regularizationParam;
     }
 
@@ -38,13 +38,13 @@ public class SparseHingeLoss extends L2RegularizedObjective {
      * @return  the gradient at the point x
      */
     @Override
-    public double[] gradient(double[] x) {
-        double [] nx = new double[x.length];
+    public float[] gradient(float[] x) {
+        float [] nx = new float[x.length];
         Arrays.fill(nx,0);
         for(int i = 0; i < dataset.count(); ++i) {
             SparseVector sv = dataset.getPoint(i);
-            double yi = HingeLoss.booleanLoss(dataset.getLabel(i));
-            double v = sv.dot(x)*yi;
+            float yi = HingeLoss.booleanLoss(dataset.getLabel(i));
+            float v = sv.dot(x)*yi;
             if(v < 1) {
                 for(int j = 0; j < x.length; ++j) {
                     nx[j] -= yi * sv.get(j);
@@ -61,8 +61,8 @@ public class SparseHingeLoss extends L2RegularizedObjective {
      * @return
      */
     @Override
-    public double eval(double[] x) {
-        double loss = 0;
+    public float eval(float[] x) {
+        float loss = 0;
         for(int  i = 0; i < dataset.count(); ++i) {
             loss += Math.max(0,1-dataset.getPoint(i).dot(x)* HingeLoss.booleanLoss(dataset.getLabel(i)));
         }

@@ -15,7 +15,7 @@ import java.util.TreeMap;
  */
 public class SparseVector {
 
-    private double [] values;
+    private float [] values;
     private int [] indices;
     private int dim;
     private int tail = 0;
@@ -32,11 +32,11 @@ public class SparseVector {
     public SparseVector(int dim) {
         this.dim = dim;
         int initialAllocSize = Math.min(dim, DEFAULT_ALLOC_SIZE);
-        values = new double[initialAllocSize];
+        values = new float[initialAllocSize];
         indices = new int[initialAllocSize];
         tail = 0;
 
-        Arrays.fill(values,0.0d);
+        Arrays.fill(values,0.0f);
         Arrays.fill(indices,INDEX_DEFAULT);
     }
 
@@ -44,9 +44,9 @@ public class SparseVector {
      * Create a sparse vector from a dense vector.
      * @param vec the dense vector
      */
-    public SparseVector(double [] vec) {
+    public SparseVector(float [] vec) {
         this.dim = vec.length;
-        values = new double[dim];
+        values = new float[dim];
         indices = new int[dim];
         tail = 0;
         for(int i = 0; i < vec.length; ++i) {
@@ -82,9 +82,9 @@ public class SparseVector {
     /**
      * set the value of the index i to d
      * @param i the index
-     * @param d the double
+     * @param d the float
      */
-    public void set(int i, double d) {
+    public void set(int i, float d) {
         if(d == 0)
             return;
 
@@ -105,7 +105,7 @@ public class SparseVector {
      * @param i the index i
      * @return the value at the point or 0
      */
-    public double get(int i) {
+    public float get(int i) {
         int ii = searchForIndex(i);
         if(ii < 0) { return  0; }
         return values[ii];
@@ -117,7 +117,7 @@ public class SparseVector {
      * @param defaultValue  the default value if a value is not already set
      * @return
      */
-    public double getOrElse(int i, double defaultValue) {
+    public float getOrElse(int i, float defaultValue) {
         int ii = searchForIndex(i);
         if(ii < 0) {
             return defaultValue;
@@ -133,13 +133,13 @@ public class SparseVector {
      * @return - the new cardinality of this array (which should be the same as the old one)
      */
     public int optimize() {
-        TreeMap<Integer,Double> k = new TreeMap<Integer, Double>();
+        TreeMap<Integer,Float> k = new TreeMap<Integer, Float>();
         for(int  i = 0; i < getCardinality(); ++i) {
             k.put(indices[i],values[i]);
         }
 
         int newTail = 0;
-        for(Map.Entry<Integer,Double> e : k.entrySet()) {
+        for(Map.Entry<Integer,Float> e : k.entrySet()) {
             indices[newTail] = e.getKey();
             values[newTail] = e.getValue();
             newTail++;
@@ -164,7 +164,7 @@ public class SparseVector {
      * @param denseVector  the dense vector
      * @return the dot product between the current vector and the dense vector.
      */
-    public double dot(double [] denseVector) {
+    public float dot(float [] denseVector) {
         assert denseVector.length == dim : "Dimensions of vectors should match for the dot-product";
         if(isOptimized()) {
             return optimizedDot(denseVector);
@@ -183,7 +183,7 @@ public class SparseVector {
         return indices;
     }
 
-    double [] getValues() {
+    float [] getValues() {
         return values;
     }
 
@@ -214,10 +214,10 @@ public class SparseVector {
         }
 
         int [] newIndexArray = new int[indices.length+expansionSize];
-        double [] newValues = new double[indices.length+expansionSize];
+        float [] newValues = new float[indices.length+expansionSize];
 
         Arrays.fill(newIndexArray,INDEX_DEFAULT);
-        Arrays.fill(newValues,0d);
+        Arrays.fill(newValues,0f);
 
         for(int i = 0; i < indices.length; ++i) {
             newIndexArray[i] = indices[i];
@@ -230,8 +230,8 @@ public class SparseVector {
 
     }
 
-    private double optimizedDot(double [] denseVector) {
-        double sum = 0;
+    private float optimizedDot(float [] denseVector) {
+        float sum = 0;
         int ptr = 0;
         for(int i = 0; i < denseVector.length && ptr < getCardinality(); ++i) {
             while(indices[ptr] < i) {

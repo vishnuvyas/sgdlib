@@ -21,11 +21,11 @@ public class GradientDescentOptimizer {
      * @param t     the iteration count. (for adaptively decreasing the step-size)
      * @return An updated value of the minimizer.
      */
-    public double [] descentStep(ObjectiveFunction objectiveFunction, double [] iv, double alpha, int t) {
+    public float[] descentStep(ObjectiveFunction objectiveFunction, float [] iv, float alpha, int t) {
 
         // compute the gradient and the step size.
-        double [] gradient = objectiveFunction.gradient(iv);
-        double stepSize = 1.0/(alpha*t + 0.1);
+        float [] gradient = objectiveFunction.gradient(iv);
+        float stepSize = 1.0f/(alpha*t + 0.1f);
 
         // scale the gradient by the step-size
         for(int i = 0; i < gradient.length; ++i)

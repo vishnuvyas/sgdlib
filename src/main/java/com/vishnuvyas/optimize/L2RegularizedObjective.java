@@ -9,7 +9,7 @@ public abstract class L2RegularizedObjective implements ObjectiveFunction {
      * Get the regularization parameter
      * @return the regularization parameter.
      */
-    public abstract double getRegularizationParam();
+    public abstract float getRegularizationParam();
 
     /**
      * Prox function in our case (L2) is simply scaling by the regularization
@@ -18,7 +18,7 @@ public abstract class L2RegularizedObjective implements ObjectiveFunction {
      * @return the soft-max subject to shrinkage lambda for this point.
      */
     @Override
-    public double[] prox(double[] g) {
+    public float[] prox(float[] g) {
         double lambda = getRegularizationParam();
         for(int i = 0; i < g.length; ++i) {
             g[i] *= 1/(2*lambda + 1);

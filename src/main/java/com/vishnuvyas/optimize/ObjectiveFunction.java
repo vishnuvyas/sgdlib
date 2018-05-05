@@ -16,7 +16,7 @@ public interface ObjectiveFunction {
      * @param x - the point at which the gradient is computed.
      * @return  the gradient at the point x
      */
-    public double[] gradient(final double [] x);
+    public float[] gradient(final float [] x);
 
 
     /**
@@ -28,7 +28,7 @@ public interface ObjectiveFunction {
      * @param g a point
      * @return the proximal of the input
      */
-    public double[] prox(double[] g);
+    public float[] prox(float[] g);
 
 
     /**
@@ -37,6 +37,6 @@ public interface ObjectiveFunction {
      * @param x  the input point x
      * @return the value of the function at x
      */
-    public double eval(double [] x);
+    public float eval(float [] x);
 
 }

@@ -10,7 +10,7 @@ abstract public class L1RegularizedObjective implements ObjectiveFunction {
      * Get the regularization parameter
      * @return the regularization parameter.
      */
-    public abstract double getRegularizationParam();
+    public abstract float getRegularizationParam();
 
     /**
      * Prox function in our case simply implements the soft-max functin
@@ -21,11 +21,11 @@ abstract public class L1RegularizedObjective implements ObjectiveFunction {
      * @return the soft-max subject to shrinkage lambda for this point.
      */
     @Override
-    public double[] prox(double[] g) {
-        double lambda = getRegularizationParam();
+    public float[] prox(float[] g) {
+        float lambda = getRegularizationParam();
         for(int i = 0; i < g.length; ++i) {
             if(Math.abs(g[i]) <= lambda)
-                g[i] = 0.0;
+                g[i] = 0.0f;
             else if(g[i] > lambda) {
                 // since we shrink the value towards lambda, and lambda is assumed
                 // positive, we have to shrink g[i] by lambda

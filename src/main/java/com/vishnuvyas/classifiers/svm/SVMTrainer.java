@@ -10,11 +10,11 @@ import java.util.Arrays;
 /**
  * Created by vishnu on 4/20/14.
  */
-public class SVMTrainer implements Trainer<double[],Boolean> {
+public class SVMTrainer implements Trainer<float[],Boolean> {
 
     private int niter;
-    private double batchFraction;
-    private double regularizationParameter;
+    private float batchFraction;
+    private float regularizationParameter;
 
     private boolean printing = false;
 
@@ -22,15 +22,15 @@ public class SVMTrainer implements Trainer<double[],Boolean> {
         printing = p;
     }
 
-    public SVMTrainer(int niter, double batchFraction, double regParam) {
+    public SVMTrainer(int niter, float batchFraction, float regParam) {
         this.niter = niter;
         this.batchFraction = batchFraction;
         this.regularizationParameter = regParam;
     }
 
-    public static String printWeights(double [] w) {
+    public static String printWeights(float [] w) {
         StringBuilder sb = new StringBuilder();
-        for(double wi : w) {
+        for(float wi : w) {
             sb.append(String.format("%2.2f",wi));
             sb.append(";");
         }
@@ -39,19 +39,19 @@ public class SVMTrainer implements Trainer<double[],Boolean> {
     }
 
     @Override
-    public Classifier<double[], Boolean> train(Dataset<double[], Boolean> dataset) {
+    public Classifier<float[], Boolean> train(Dataset<float[], Boolean> dataset) {
         GradientDescentOptimizer optimizer = new GradientDescentOptimizer();
-        double [] w = new double[dataset.dim()];
-        Arrays.fill(w, 0.0d);
+        float [] w = new float[dataset.dim()];
+        Arrays.fill(w, 0.0f);
         for(int t = 0; t < niter; ++t) {
-            Dataset<double[],Boolean> batch = dataset.sample(batchFraction);
+            Dataset<float[],Boolean> batch = dataset.sample(batchFraction);
             HingeLoss loss = new HingeLoss(batch,regularizationParameter);
             if(t > 0 && t % 1000 == 0 && printing) {
                 System.out.println("The weights at step " + t
                         + " are " + printWeights(w)
                         + " and loss is " + String.format("%.3f", loss.eval(w)));
             }
-            w = optimizer.descentStep(loss,w,0.1,t);
+            w = optimizer.descentStep(loss,w,0.1f,t);
         }
 
         return new SVMClassifier(w);

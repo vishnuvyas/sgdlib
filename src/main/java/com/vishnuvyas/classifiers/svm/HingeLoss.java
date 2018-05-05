@@ -14,14 +14,14 @@ import java.util.Arrays;
  */
 public class HingeLoss extends L2RegularizedObjective {
 
-    private Dataset<double[],Boolean> dataset;
-    private double regularizationParam;
+    private Dataset<float[],Boolean> dataset;
+    private float regularizationParam;
 
 
-    private double dot(double [] x, double [] y) {
+    private float dot(float [] x, float [] y) {
         assert x.length == y.length : "The dimensions of the two vectors in a dot product should be same";
 
-        double d = 0;
+        float d = 0;
         for(int i = 0; i < x.length ; ++i)
             d += (x[i]*y[i]);
 
@@ -29,20 +29,20 @@ public class HingeLoss extends L2RegularizedObjective {
     }
 
 
-    public HingeLoss(Dataset<double[],Boolean> dataset,double reg) {
+    public HingeLoss(Dataset<float[],Boolean> dataset,float reg) {
         this.dataset = dataset;
         this.regularizationParam = reg;
     }
 
     @Override
-    public double[] gradient(double[] x) {
-        double [] gradient = new double[x.length];
-        Arrays.fill(gradient,0.0);
+    public float[] gradient(float[] x) {
+        float [] gradient = new float[x.length];
+        Arrays.fill(gradient,0.0f);
 
         for(int i = 0; i < dataset.count(); ++i) {
-            double [] xi = dataset.getPoint(i);
-            double yi = booleanLoss(dataset.getLabel(i));
-            double v = dot(xi,x)*yi;
+            float [] xi = dataset.getPoint(i);
+            float yi = booleanLoss(dataset.getLabel(i));
+            float v = dot(xi,x)*yi;
             if(v < 1) {
                 // then this is an error we need to correct and the update
                 // is -yx
@@ -56,13 +56,13 @@ public class HingeLoss extends L2RegularizedObjective {
     }
 
     @Override
-    public double getRegularizationParam() {
+    public float getRegularizationParam() {
         return regularizationParam;
     }
 
     @Override
-    public double eval(double[] x) {
-        double loss = 0;
+    public float eval(float[] x) {
+        float loss = 0;
         for(int i = 0; i < dataset.count(); ++i) {
             loss += Math.max(0,(1 - dot(dataset.getPoint(i),x)*booleanLoss(dataset.getLabel(i))));
         }
@@ -70,7 +70,7 @@ public class HingeLoss extends L2RegularizedObjective {
         return loss;
     }
 
-    public static double booleanLoss(boolean b) {
+    public static float booleanLoss(boolean b) {
         if(b)
             return 1;
         else

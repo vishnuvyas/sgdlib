@@ -59,5 +59,5 @@ public interface Dataset<VectorType,LabelType> {
      * @param fraction the sampling fraction.
      * @return a subset of the dataset sampled.
      */
-    public Dataset<VectorType,LabelType> sample(double fraction);
+    public Dataset<VectorType,LabelType> sample(float fraction);
 }
