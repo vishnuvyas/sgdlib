@@ -13,6 +13,7 @@ public class SparseHingeLoss extends L2RegularizedObjective {
 
     private Dataset<SparseVector,Boolean> dataset;
     private float regularizationParam;
+    private float[] lastGradient;
 
     /**
      * Create a new sparse hinge loss, used in our trainers.
@@ -22,6 +23,7 @@ public class SparseHingeLoss extends L2RegularizedObjective {
     public SparseHingeLoss(Dataset<SparseVector,Boolean> dataset, float lambda) {
         this.dataset = dataset;
         this.regularizationParam = lambda;
+        this.lastGradient = new float[dataset.dim()];
     }
 
     @Override
@@ -39,20 +41,19 @@ public class SparseHingeLoss extends L2RegularizedObjective {
      */
     @Override
     public float[] gradient(float[] x) {
-        float [] nx = new float[x.length];
-        Arrays.fill(nx,0);
+        Arrays.fill(lastGradient,0);
         for(int i = 0; i < dataset.count(); ++i) {
             SparseVector sv = dataset.getPoint(i);
             float yi = HingeLoss.booleanLoss(dataset.getLabel(i));
             float v = sv.dot(x)*yi;
             if(v < 1) {
-                for(int j = 0; j < x.length; ++j) {
-                    nx[j] -= yi * sv.get(j);
+                for(int j = 0; j < dataset.dim(); ++j) {
+                    lastGradient[j] -= yi * sv.get(j);
                 }
             }
         }
 
-        return nx;
+        return lastGradient;
     }
 
     /**

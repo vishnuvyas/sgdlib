@@ -16,6 +16,7 @@ public class HingeLoss extends L2RegularizedObjective {
 
     private Dataset<float[],Boolean> dataset;
     private float regularizationParam;
+    private float [] lastGradient;
 
 
     private float dot(float [] x, float [] y) {
@@ -32,12 +33,12 @@ public class HingeLoss extends L2RegularizedObjective {
     public HingeLoss(Dataset<float[],Boolean> dataset,float reg) {
         this.dataset = dataset;
         this.regularizationParam = reg;
+        this.lastGradient = new float[dataset.dim()];
     }
 
     @Override
     public float[] gradient(float[] x) {
-        float [] gradient = new float[x.length];
-        Arrays.fill(gradient,0.0f);
+        Arrays.fill(lastGradient,0.0f);
 
         for(int i = 0; i < dataset.count(); ++i) {
             float [] xi = dataset.getPoint(i);
@@ -46,13 +47,13 @@ public class HingeLoss extends L2RegularizedObjective {
             if(v < 1) {
                 // then this is an error we need to correct and the update
                 // is -yx
-                for(int  j = 0; j < xi.length; ++j) {
-                    gradient[j] -= yi * xi[j];
+                for(int  j = 0; j < dataset.dim(); ++j) {
+                    lastGradient[j] -= yi * xi[j];
                 }
             }
         }
 
-        return gradient;
+        return lastGradient;
     }
 
     @Override
