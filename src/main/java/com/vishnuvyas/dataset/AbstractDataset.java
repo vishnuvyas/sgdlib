@@ -1,4 +1,4 @@
-package com.vishnuvyas.classifiers.training.dataset;
+package com.vishnuvyas.dataset;
 
 import com.vishnuvyas.classifiers.Classifier;
 

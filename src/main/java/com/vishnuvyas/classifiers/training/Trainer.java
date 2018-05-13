@@ -1,7 +1,7 @@
 package com.vishnuvyas.classifiers.training;
 
 import com.vishnuvyas.classifiers.Classifier;
-import com.vishnuvyas.classifiers.training.dataset.Dataset;
+import com.vishnuvyas.dataset.Dataset;
 
 /**
  * Created by vishnu on 4/20/14.

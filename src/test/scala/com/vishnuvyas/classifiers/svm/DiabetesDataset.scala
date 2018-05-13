@@ -1,6 +1,6 @@
 package com.vishnuvyas.classifiers.svm
 
-import com.vishnuvyas.classifiers.training.dataset.{AbstractDataset, Dataset}
+import com.vishnuvyas.dataset.{AbstractDataset, Dataset}
 import scala.io.Source
 import java.util
 import collection.JavaConversions._

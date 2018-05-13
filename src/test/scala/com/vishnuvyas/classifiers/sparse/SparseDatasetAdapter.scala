@@ -1,6 +1,6 @@
 package com.vishnuvyas.classifiers.sparse
 
-import com.vishnuvyas.classifiers.training.dataset.{AbstractDataset, Dataset}
+import com.vishnuvyas.dataset.{AbstractDataset, Dataset}
 import java.{lang, util}
 
 /**

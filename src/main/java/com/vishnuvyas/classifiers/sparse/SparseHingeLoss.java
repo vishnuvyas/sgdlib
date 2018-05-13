@@ -1,7 +1,7 @@
 package com.vishnuvyas.classifiers.sparse;
 
 import com.vishnuvyas.classifiers.svm.HingeLoss;
-import com.vishnuvyas.classifiers.training.dataset.Dataset;
+import com.vishnuvyas.dataset.Dataset;
 import com.vishnuvyas.optimize.L2RegularizedObjective;
 
 import java.util.Arrays;
